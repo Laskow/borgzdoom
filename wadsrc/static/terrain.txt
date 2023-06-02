@@ -1,0 +1,107 @@
+// Splashes ----------------------------------------------------------------
+
+splash Lava
+{
+	smallclass		LavaSplash
+	smallclip		12
+	smallsound		world/lavasizzle
+
+	baseclass		LavaSplash
+	chunkclass		LavaSmoke
+	chunkxvelshift	-1
+	chunkyvelshift	-1
+	chunkzvelshift	7
+	chunkbasezvel	1
+	sound			world/lavasizzle
+}
+
+ifheretic
+
+splash Lava
+{
+   smallclass      LavaSplash
+   smallclip      12
+   smallsound      world/lavasizzle
+
+   baseclass      LavaSplash
+   chunkclass      LavaSmoke
+   chunkxvelshift   -1
+   chunkyvelshift   -1
+   chunkzvelshift   7
+   chunkbasezvel   1
+   sound         world/lavasizzle
+   noalert
+}
+
+
+endif
+
+// Terrain types -----------------------------------------------------------
+
+ifheretic
+
+terrain Lava
+{
+	splash			Lava
+	footclip		10
+	liquid
+}
+
+endif
+
+ifhexen
+
+terrain Lava
+{
+	splash			Lava
+	footclip		10
+	liquid
+	damageamount	5
+	damagetype		lava
+	damagetimemask	31
+	damageonland
+}
+
+terrain Ice
+{
+	// A friction > 1 is actually less friction
+	friction 1.70824008138
+
+	// Ice doesn't actually do any damage. This is just so that things
+	// that freeze to death take longer to melt on this terrain.
+	damagetype ice
+}
+
+endif
+
+// Floor -> terrain mappings -----------------------------------------------
+
+ifheretic
+floor FLTWAWA1 Water
+floor FLTFLWW1 Water
+floor FLTLAVA1 Lava
+floor FLATHUH1 Lava
+floor FLTSLUD1 Sludge
+endif
+
+ifhexen
+floor X_005 Water
+floor X_001 Lava
+floor X_009 Sludge
+floor F_033 Ice
+endif
+
+ifstrife
+floor F_WATR03 JustASound
+floor F_WATR02 JustASound
+floor F_WATR01 JustASound
+floor F_VWATR3 JustASound
+floor F_VWATR2 JustASound
+floor P_VWATR1 JustASound
+floor F_HWATR3 JustASound
+floor F_HWATR2 JustASound
+floor F_HWATR1 JustASound
+floor F_PWATR3 JustASound
+floor F_PWATR2 JustASound
+floor F_PWATR1 JustASound
+endif
