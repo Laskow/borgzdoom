@@ -585,28 +585,43 @@ void DBaseStatusBar::DoDrawAutomapHUD(int crdefault, int highlight)
 
 	if (!deathmatch)
 	{
-		y = 0;
-		if (am_showmonsters)
-		{
-			textbuffer.Format("%s\34%c %d/%d", GStrings("AM_MONSTERS"), crdefault + 65, primaryLevel->killed_monsters, primaryLevel->total_monsters);
-			DrawText(twod, font2, highlight, textdist, y, textbuffer, DTA_KeepRatio, true, DTA_VirtualWidth, vwidth, DTA_VirtualHeight, vheight, TAG_DONE);
-			y += fheight;
-		}
+		// [las] Added some lines to show items/secrets/kill stats on the top of the statusbar, bottom of the screen.
+		//       No more log traffic. Hurray!
 
-		if (am_showsecrets)
-		{
-			textbuffer.Format("%s\34%c %d/%d", GStrings("AM_SECRETS"), crdefault + 65, primaryLevel->found_secrets, primaryLevel->total_secrets);
-			DrawText(twod, font2, highlight, textdist, y, textbuffer, DTA_KeepRatio, true, DTA_VirtualWidth, vwidth, DTA_VirtualHeight, vheight, TAG_DONE);
-			y += fheight;
-		}
+		auto lines = V_BreakLines(font, vwidth - 32, textbuffer, true);
+		auto numlines = lines.Size();
+
+		double x = 0, yy = 0, w = HorizontalResolution, h = 0;
+
+		StatusbarToRealCoords(x, yy, w, h);
+
+		y = Scale(GetTopOfStatusbar() - int(h), vheight, twod->GetHeight()) - fheight * numlines;
 
 		// Draw item count
 		if (am_showitems)
 		{
 			textbuffer.Format("%s\34%c %d/%d", GStrings("AM_ITEMS"), crdefault + 65, primaryLevel->found_items, primaryLevel->total_items);
-			DrawText(twod, font2, highlight, textdist, y, textbuffer, DTA_KeepRatio, true, DTA_VirtualWidth, vwidth, DTA_VirtualHeight, vheight, TAG_DONE);
-			y += fheight;
+			DrawText(twod, font2, highlight, textdist, y, textbuffer, DTA_KeepRatio, true, DTA_VirtualWidth, vwidth, DTA_VirtualHeight, vheight,
+			DTA_Monospace, EMonospacing::CellCenter, DTA_Spacing, zerowidth, TAG_DONE);
+			y -= fheight;
 		}
+
+		if (am_showsecrets)
+		{
+			textbuffer.Format("%s\34%c %d/%d", GStrings("AM_SECRETS"), crdefault + 65, primaryLevel->found_secrets, primaryLevel->total_secrets);
+			DrawText(twod, font2, highlight, textdist, y, textbuffer, DTA_KeepRatio, true, DTA_VirtualWidth, vwidth, DTA_VirtualHeight, vheight,
+			DTA_Monospace, EMonospacing::CellCenter, DTA_Spacing, zerowidth, TAG_DONE);
+			y -= fheight;
+		}
+
+		if (am_showmonsters)
+		{
+			textbuffer.Format("%s\34%c %d/%d", GStrings("AM_MONSTERS"), crdefault + 65, primaryLevel->killed_monsters, primaryLevel->total_monsters);
+			DrawText(twod, font2, highlight, textdist, y, textbuffer, DTA_KeepRatio, true, DTA_VirtualWidth, vwidth, DTA_VirtualHeight, vheight,
+			DTA_Monospace, EMonospacing::CellCenter, DTA_Spacing, zerowidth, TAG_DONE);
+			y -= fheight;
+		}
+
 
 	}
 
