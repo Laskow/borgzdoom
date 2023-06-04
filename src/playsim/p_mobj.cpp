@@ -1845,8 +1845,11 @@ double P_XYMovement (AActor *mo, DVector2 scroll)
 	//  speed caps as well, since it is a sort of friction, and the modders
 	//  most likely want to deal with that themselves.
 	
-	if ((mo->player != NULL && (mo->Level->i_compatflags & COMPATF_WALLRUN)) || ((mo->waterlevel >= 1 ||
-		(mo->player != NULL && mo->player->crouchfactor < 0.75)) && !(mo->flags8 & MF8_NOFRICTION)))
+	// [las] Deleted check the actor's water level.
+	// Because even if the flag "NOFRICTION" is enabled, somehow the non-gravity projectile refracts in the water. Ugh.
+
+	if ((mo->player != NULL && (mo->Level->i_compatflags & COMPATF_WALLRUN)) ||
+		(((mo->player != NULL && mo->player->crouchfactor < 0.75)) && !(mo->flags8 & MF8_NOFRICTION)))
 	{
 		// preserve the direction instead of clamping x and y independently.
 		double cx = mo->Vel.X == 0 ? 1. : clamp(mo->Vel.X, -maxmove, maxmove) / mo->Vel.X;
