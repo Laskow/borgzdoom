@@ -597,6 +597,9 @@ void DBaseStatusBar::DoDrawAutomapHUD(int crdefault, int highlight)
 
 		y = Scale(GetTopOfStatusbar() - int(h), vheight, twod->GetHeight()) - fheight * numlines;
 
+		if (!am_showtime)
+		y -= fheight;
+
 		// Draw item count
 		if (am_showitems)
 		{
