@@ -1,24 +1,23 @@
-// this file has the simplified menu here.
-// this file is *only* for options that are relevant to a novice user of GZDoom
-// this file needs to be regularly pruned, with options coalesced as much as possible. any and all verbosity should go to the "full" menus.
-
-OptionMenu "OptionsMenuSimple" protected
+OptionMenu "OptionsMenuSimple"
 {
 	Title "$OPTMNU_TITLE"
-	Submenu "$OPTMNU_CONTROLS",			"CustomizeControls"
-	Submenu "$OPTMNU_MOUSE",			"MouseOptionsSimple"
+	Submenu "$OPTMNU_CONTROLS",			"BorCustomizeControls"
+	Submenu "$OPTMNU_MOUSE",			"BorMouseOptionsSimple"
 	Submenu "$OPTMNU_JOYSTICK",			"JoystickOptions"
 	StaticText " "
-	Submenu "$OPTMNU_PLAYER",			"NewPlayerMenu"
-	StaticText " "
-	Submenu "$OPTMNU_SOUND",			"SoundOptionsSimple"
-	Submenu "$OPTMNU_DISPLAY",			"VideoOptionsSimple"
-	Submenu "$HUDMNU_SCALEOPT",			"ScalingOptionsSimple"
-	StaticText " "
-	Submenu "$OPTMNU_MISCELLANEOUS",	"MiscOptionsSimple"	
+	Submenu "$OPTMNU_PLAYER", "BorNewPlayerMenu"
+	Submenu "$OPTMNU_AUTOMAP", "BorAutomapOptionsSimple"
+	Submenu "$OPTMNU_HUD", "BorHUDOptionsSimple"
+	Submenu "$OPTMNU_Save", "BorSaveOptions"
+	Submenu "$OPTMNU_MISCELLANEOUS", "BorMiscOptionsSimple"
+	Submenu "$OPTMNU_SOUND", "BorSoundOptionsSimple"
+	Submenu "$OPTMNU_DISPLAY", "BorVideoOptionsSimple"
+	Submenu "$OPTMNU_VIDEO", "VideoModeMenuSimple"
+    Submenu "$OPTMNU_NASHGORE", "NashGoreMenu" 
+	Submenu "$TS_OPTIONS_TITLE", "ts_Options"
 	StaticText " "
 	Submenu "$OS_TITLE", "os_Menu"
-	StaticText " "
+	StaticText ""
 	Submenu "$OPTMNU_FULLOPTIONS", "OptionsMenuFull"
 	StaticText " "
 	SafeCommand	"$OPTMNU_DEFAULTS",		"reset2defaults"
@@ -28,7 +27,61 @@ OptionMenu "OptionsMenuSimple" protected
 	StaticText " "
 }
 
-OptionMenu SoundOptionsSimple protected
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu "BorAutomapOptionsSimple"
+{
+	Title "$AUTOMAPMNU_TITLE"
+
+	StaticText ""
+	Option "$AUTOMAPMNU_ROTATE",				"am_rotate", "RotateTypes"
+	Option "$AUTOMAPMNU_FOLLOW",				"am_followplayer", "OnOff"
+	Option "$AUTOMAPMNU_OVERLAY",				"am_overlay", "OverlayTypes"
+	Option "$AUTOMAPMNU_TEXTURED",				"am_textured", "OnOff"
+
+	StaticText ""
+	Option "$AUTOMAPMNU_SHOWMONSTERS",			"am_showmonsters", "OnOff"
+	Option "$AUTOMAPMNU_SHOWSECRETS",			"am_showsecrets", "OnOff"
+	Option "$AUTOMAPMNU_SHOWTIME",				"am_showtime", "OnOff"
+	Option "$AUTOMAPMNU_SHOWTOTALTIME",			"am_showtotaltime", "OnOff"
+
+	StaticText ""
+	Option "$AUTOMAPMNU_PLAYERARROW", "am_playerarrow", "PlayerArrowValues" // [las]
+
+	StaticText ""
+	Slider "$AUTOMAPMNU_EMPTYSPACEMARGIN",		"am_emptyspacemargin", 0, 90, 5, 0
+
+	StaticText ""
+	Option "$AUTOMAPMNU_MARKFONT",				"am_markfont", "MapMarkFont"
+	Option "$AUTOMAPMNU_MARKCOLOR",				"am_markcolor", "TextColors"
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu "BorHUDOptionsSimple"
+{
+	Title "$HUDMNU_TITLE"
+
+	StaticText " "
+	ScaleSlider "$HUDMNU_UISCALE",				"uiscale", 0.0, 8.0, 1.0, "$SCALEMNU_ADAPT"
+	Option "$SCALEMNU_HUDASPECT", 				"hud_aspectscale", "OnOff"
+	Slider "$DSPLYMNU_SCREENSIZE",				"screenblocks", 				3.0, 12.0, 1.0, 0
+	StaticText " "
+	Option "$HUDMNU_CROSSHAIRON",			"crosshairon", "OnOff"
+	Option "$HUDMNU_CROSSHAIR",				"crosshair", "Crosshairs"
+	ColorPicker "$HUDMNU_CROSSHAIRCOLOR", 	"crosshaircolor"
+	Slider "$HUDMNU_CROSSHAIRSCALE",		"crosshairscale", 0.0, 2.0, 0.05, 2
+	StaticText " "
+	Slider "$DSPLYMNU_MOVEBOB",				"movebob", 0, 1.0, 0.05, 2
+	Slider "$DSPLYMNU_STILLBOB",			"stillbob", 0, 1.0, 0.05, 2
+	Slider "$DSPLYMNU_BOBSPEED",			"wbobspeed", 0, 2.0, 0.1
+	Slider "$DSPLYMNU_BOBFIRE",				"wbobfire", 0, 1.0, 0.1
+	StaticText " "
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu BorSoundOptionsSimple
 {
 	Title "$SNDMNU_TITLE"
 	Slider "$MODMNU_MASTERVOLUME",		"snd_mastervolume", 0, 1, 0.05, 2
@@ -36,34 +89,18 @@ OptionMenu SoundOptionsSimple protected
 	Slider "$SNDMNU_SFXVOLUME",			"snd_sfxvolume", 0, 1, 0.05, 2
 	Slider "$SNDMNU_MUSICVOLUME",		"snd_musicvolume", 0, 1, 0.05, 2
 	StaticText " "
-	Slider "$SNDMNU_MENUVOLUME",		"snd_menuvolume", 0, 1, 0.05, 2
-	StaticText " "
 	Option "$SNDMNU_MIDIDEVICE",		"snd_mididevice", "MidiDevices"
 	Command "$SNDMNU_RESTART",			"snd_reset"
+	StaticText ""
+	Option "$OP_CD", "CDmusic", "OnOff"
+	StaticText "$OP_CDHELP", 1
 }
 
-OptionMenu VideoOptionsSimple protected
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu BorVideoOptionsSimple
 {
 	Title "$DSPLYMNU_TITLE"
-
-	Option "$VIDMNU_PREFERBACKEND",		"vid_preferbackend", "PreferBackend"
-	Option "$VIDMNU_RENDERMODE",		"vid_rendermode", "RenderMode"
-	Option "$VIDMNU_FULLSCREEN",		"vid_fullscreen", "YesNo"
-	IfOption(Mac)
-	{
-		Option "$VIDMNU_HIDPI",			"vid_hidpi", "YesNo"
-	}
-
-	StaticText " "
-	Option "$DSPLYMNU_DRAWFUZZ",				"r_drawfuzz", "Fuzziness"
-	Option "$DSPLYMNU_WIPETYPE",				"wipetype", "Wipes"
-	StaticText " "
-	Option "$GLTEXMNU_TEXFILTER",		gl_texture_filter,				"FilterModes"
-	Option "$GLTEXMNU_ANISOTROPIC",		gl_texture_filter_anisotropic,	"Anisotropy"
-	Option "$GLPREFMNU_SECLIGHTMODE",			gl_lightmode,					"LightingModes"
-	StaticText " "
-	Option "$DSPLYMNU_VSYNC",					"vid_vsync", "OnOff"
-	Option "$VIDMNU_MAXFPS",					"vid_maxfps", "MaxFps"
 	StaticText " "
 	Slider "$DSPLYMNU_GAMMA",					"vid_gamma",					0.75, 3.0, 0.05, 2
 	Slider "$DSPLYMNU_BRIGHTNESS",				"vid_brightness",				-0.8,0.8, 0.05,2
@@ -71,38 +108,77 @@ OptionMenu VideoOptionsSimple protected
 	Slider "$DSPLYMNU_SATURATION",				"vid_saturation",  				-3.0, 3.0, 0.25, 2
 	StaticText " "
 	Slider "$DSPLYMNU_FOV",						"fov",							75.0, 120.0, 0.1, 1
-	// commenting this out for now, this menu is so general purpose I am not sure it makes sense, but I'm leaving it here just in case
-	// the "full" menu doesn't have some of the options that are in this one.
-	//StaticText " "
-	//Submenu "$OPTMNU_FULLOPTIONS", "VideoModeMenu"
+	Slider "$DSPLYMNU_QUAKEINTENSITY",			"r_quakeintensity", 0.0, 1.0, 0.05, 2
+	StaticText ""
+	Option "$GLTEXMNU_TEXFILTER",		gl_texture_filter,				"FilterModes"
+	Option "$GLTEXMNU_ANISOTROPIC",		gl_texture_filter_anisotropic,	"Anisotropy"
+	StaticText ""
+    Option "$OP_VOXEL", "Voxel", "OnOff"
+	Option "$PrecipitationAmount", "weather_amount", "WeatherPrecipitationAmount"
 }
 
-OptionMenu ScalingOptionsSimple protected
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu VideoModeMenuSimple
 {
-	Title "$SCALEMNU_TITLE"
-	StaticText "$OPTMNU_HUD"
-	ScaleSlider "$HUDMNU_UISCALE",				"uiscale", 0.0, 8.0, 1.0, "$SCALEMNU_ADAPT"
-	Option "$SCALEMNU_HUDASPECT", 				"hud_aspectscale", "OnOff"
-	Slider "$DSPLYMNU_SCREENSIZE",				"screenblocks", 				3.0, 12.0, 1.0, 0
+	Title "$VIDMNU_TITLE"
+
+	Option "$VIDMNU_PREFERBACKEND",		"vid_preferbackend", "PreferBackend"
 	StaticText " "
-	StaticText "$VIDMNU_TITLE"
+	Option "$VIDMNU_FULLSCREEN",		"vid_fullscreen", "YesNo"
+
+	IfOption(Mac)
+	{
+		Option "$VIDMNU_HIDPI",			"vid_hidpi", "YesNo"
+	}
+	IfOption(Windows)
+	{
+		Option "$DSPLYMNU_GPUSWITCH",			vid_gpuswitch, "GPUSwitch"
+	}
+
+	Option "$VIDMNU_FORCEASPECT",		"vid_aspect", "ForceRatios"
+	Option "$VIDMNU_CROPASPECT",		"vid_cropaspect", "CropAspect"
 	Option "$VIDMNU_SCALEMODE",			"vid_scalemode", "ScaleModes"
 	Slider "$VIDMNU_SCALEFACTOR",		"vid_scalefactor", 0.25, 2.0, 0.25, 2
+
+	StaticText " "
+	Option "$DSPLYMNU_VSYNC",					"vid_vsync", "OnOff"
+	Option "$VIDMNU_MAXFPS",					"vid_maxfps", "MaxFps"
+	Option "$DSPLYMNU_CAPFPS",					"cl_capfps", "OffOn"
+	
+	StaticText ""
+	StaticText "$VIDMNU_CUSTOMRES"
+	TextField "$VIDMNU_CUSTOMX", menu_resolution_custom_width
+	TextField "$VIDMNU_CUSTOMY", menu_resolution_custom_height
+	Option "$VIDMNU_USELINEAR", "vid_scale_linear", "YesNo"
+	StaticText ""
+	Command "$VIDMNU_APPLYW", "menu_resolution_commit_changes 0"
+	Command "$VIDMNU_APPLYFS", "menu_resolution_commit_changes 1"
+	StaticText ""
+
+	SubMenu "$VIDMNU_RESPRESET", CustomResolutionMenu
 }
 
-OptionMenu MiscOptionsSimple protected
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu BorMiscOptionsSimple
 {
 	Title "$MISCMNU_TITLE"
-	Option "$MISCMNU_QUERYIWAD",				"queryiwad", "OnOff"
 	Option "$MISCMNU_NOCHEATS",					"nocheats", "OnOff"
-	Option "$MISCMNU_ALLCHEATS",				"allcheats", "OnOff"
-	Option "$MISCMNU_ENABLEAUTOSAVES",			"disableautosave", "Autosave"
-	Option "$MISCMNU_DEHLOAD",					"dehload", "dehopt"
-	Option "$MISCMNU_ENABLESCRIPTSCREENSHOTS",	"enablescriptscreenshot", "OnOff"
+	Option "$MISCMNU_PAUSEINBACKGROUND",		"i_pauseinbackground", "OnOff"
+	Option "$MISCMNU_QUICKEXIT",				"m_quickexit", "OnOff"
+	StaticText " "
+	Option "$MISCMNU_showMapName", "showMapName", "OnOff"
+	StaticText " "
+	Option "$b_subtitles", "b_subtitles", "SubtitleValues"
+    Option "$MSGMNU_SKIPCUTSCENES",	"skipcutscenes", "OnOff"
+	StaticText " "
 	Option "$OPTMNU_LANGUAGE",					"language", "LanguageOptions"
 }
 
-OptionMenu "MouseOptionsSimple" protected
+//--------------------------------------------------------------------------------------------------------------
+
+OptionMenu "BorMouseOptionsSimple"
 {
 	Title "$MOUSEMNU_TITLE"
 	Option "$MOUSEMNU_ENABLEMOUSE",		"use_mouse", "YesNo"
@@ -111,10 +187,13 @@ OptionMenu "MouseOptionsSimple" protected
 	{
 		Option "$MOUSEMNU_SWAPBUTTONS", "m_swapbuttons", "YesNo"
 	}
-	Option "$MOUSEMNU_CURSOR",			"vid_cursor", "Cursors"
+	Option "$MOUSEMNU_CURSOR",			"vid_cursor", "BorCursors"
 	StaticText 	""
 	Slider "$MOUSEMNU_SENSITIVITY_X",	"m_sensitivity_x", 0.5, 8, 0.25
 	Slider "$MOUSEMNU_SENSITIVITY_Y",	"m_sensitivity_y", 0.5, 8, 0.25
 	StaticText 	""
 	Option "$MOUSEMNU_INVERTMOUSE",		"invertmouse", "OnOff"
 }
+
+//--------------------------------------------------------------------------------------------------------------
+
