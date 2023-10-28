@@ -60,6 +60,7 @@ CVAR(Bool, snd_waterreverb, true, CVAR_ARCHIVE | CVAR_GLOBALCONFIG)
 CVAR (String, snd_aldevice, "Default", CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
 CVAR (Bool, snd_efx, true, CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
 CVAR (String, snd_alresampler, "Default", CVAR_ARCHIVE|CVAR_GLOBALCONFIG)
+CVAR(Bool, snd_waterlpfilter, true, CVAR_ARCHIVE | CVAR_GLOBALCONFIG) // [las] added
 
 #ifdef _WIN32
 #define OPENALLIB "openal32.dll"
@@ -112,6 +113,7 @@ EXTERN_CVAR (Int, snd_samplerate)
 EXTERN_CVAR (Bool, snd_waterreverb)
 EXTERN_CVAR (Bool, snd_pitched)
 EXTERN_CVAR (Int, snd_hrtf)
+EXTERN_CVAR (Bool, snd_waterlpfilter) // [las] added
 
 
 #define MAKE_PTRID(x)  ((void*)(uintptr_t)(x))
@@ -1677,7 +1679,13 @@ void OpenALSoundRenderer::UpdateListener(SoundListener *listener)
 	}
 
 	// NOTE: Moving into and out of water will undo pitch variations on sounds.
-	if(listener->underwater || env->SoftwareWater)
+
+	//[las] if the low pass filter is false and the underwater reverb is false, do nothing
+	if(!snd_waterlpfilter && !snd_waterreverb && listener->underwater || env->SoftwareWater )
+	return;
+
+
+	if(snd_waterlpfilter && listener->underwater || env->SoftwareWater)
 	{
 		if(!WasInWater)
 		{
@@ -1694,6 +1702,7 @@ void OpenALSoundRenderer::UpdateListener(SoundListener *listener)
 				alFilterf(EnvFilters[1], AL_LOWPASS_GAIN, 1.f);
 				alFilterf(EnvFilters[1], AL_LOWPASS_GAINHF, 1.f);
 
+
 				// Apply the updated filters on the sources
 				FSoundChan *schan = soundEngine->GetChannels();
 				while (schan)
@@ -1709,11 +1718,12 @@ void OpenALSoundRenderer::UpdateListener(SoundListener *listener)
 			}
 
 			FSoundChan *schan = soundEngine->GetChannels();
+			
 			while (schan)
 			{
 				ALuint source = GET_PTRID(schan->SysChannel);
 				if (source && !(schan->ChanFlags & CHANF_UI))
-					alSourcef(source, AL_PITCH, schan->Pitch / 128.0f * PITCH_MULT);
+				alSourcef(source, AL_PITCH, schan->Pitch / 128.0f * PITCH_MULT);
 				schan = schan->NextChan;
 			}
 			getALError();
@@ -1751,7 +1761,7 @@ void OpenALSoundRenderer::UpdateListener(SoundListener *listener)
 		{
 			ALuint source = GET_PTRID(schan->SysChannel);
 			if (source && !(schan->ChanFlags & CHANF_UI))
-				alSourcef(source, AL_PITCH, schan->Pitch / 128.0f);
+			alSourcef(source, AL_PITCH, schan->Pitch / 128.0f);
 			schan = schan->NextChan;
 		}
 		getALError();

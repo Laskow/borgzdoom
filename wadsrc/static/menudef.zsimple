@@ -88,6 +88,8 @@ OptionMenu BorSoundOptionsSimple
 	StaticText " "
 	Slider "$SNDMNU_SFXVOLUME",			"snd_sfxvolume", 0, 1, 0.05, 2
 	Slider "$SNDMNU_MUSICVOLUME",		"snd_musicvolume", 0, 1, 0.05, 2
+	slider "$SNDMNU_VOICEVOLUME", "snd_voicevolume", 0, 1, 0.05, 2
+	slider "$SNDMNU_NPCVOICEVOLUME", "snd_npcvoicevolume", 0, 1, 0.05, 2
 	StaticText " "
 	Option "$SNDMNU_MIDIDEVICE",		"snd_mididevice", "MidiDevices"
 	Command "$SNDMNU_RESTART",			"snd_reset"

@@ -1,0 +1,7 @@
+[enu default]  //English (US)
+
+AUTOMAPMNU_PLAYERARROW = "Player rendering method";
+AM_MapArrow = "Map Arrow";
+AM_Sprite = "Sprite";
+
+SNDMNU_UNDERWATERLPFILTER = "Underwater filter (when no reverb)";
