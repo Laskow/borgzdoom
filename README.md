@@ -17,6 +17,7 @@ borgzdoom is a customized GZDoom engine based on GZDoom 4.8.2.
 
 - Sounds
   - The usefail sound is disabled.
+  - The new CVAR (bool) "snd_waterlpfilter" is added. It handles the underwater low pass filter. In short, you can hear only clear sounds while in the water when you turn off this (no muffed sounds!). It's a rough edit so still working in process.
 
 - Options
   - Some multiplayer options have been removed from MENUDEF.
