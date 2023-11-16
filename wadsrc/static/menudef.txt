@@ -7,30 +7,32 @@ DefaultListMenu
 
 ListMenu "MainMenu"
 {
-	LineSpacing 17
+    LineSpacing 17
     StaticPatchCentered 160, 0, "graphics/m_doom.png" //logo
     Position 125, 56
-	PatchItem "B_NGAME", "n", "PlayerclassMenu", 0
-	PatchItem "B_OPTION", "o", "OptionsMenu", 0
-	PatchItem "B_LOADG", "l", "LoadGameMenu", 0
-	PatchItem "B_SAVEG", "s", "SaveGameMenu", 0
-	PatchItem "B_RDTHIS", "i", "ReadThisMenu", 0
-	PatchItem "B_ACHIV", "a", "AchievementsMenu"
-	PatchItem "B_QUITG", "q", "QuitMenu", 0
+    PatchItem "B_NGAME", "n", "PlayerclassMenu", 0
+    PatchItem "B_OPTION", "o", "OptionsMenu", 0
+    PatchItem "B_LOADG", "l", "LoadGameMenu", 0
+    PatchItem "B_SAVEG", "s", "SaveGameMenu", 0
+    PatchItem "B_RDTHIS", "i", "ReadThisMenu", 0
+    PatchItem "B_CREDI", "c", "CreditsMenu"
+    PatchItem "B_ACHIV", "a", "AchievementsMenu"
+    PatchItem "B_QUITG", "q", "QuitMenu", 0
 }
 
 ListMenu "MainMenuTextOnly"
 {
-	LineSpacing 17
+    LineSpacing 17
     StaticPatchCentered 160, 0, "graphics/m_doom.png" //logo
     Position 125, 56
-	TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
-	TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
-	TextItem "$MNU_LOADGAME", "l", "LoadGameMenu"
-	TextItem "$MNU_SAVEGAME", "s", "SaveGameMenu"
-	TextItem "$MNU_INFO", "i", "ReadThisMenu"
-	TextItem "$sa_Achievements", "a", "AchievementsMenu"
-	TextItem  "$MNU_QUITGAME", "q", "QuitMenu"
+    TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
+    TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
+    TextItem "$MNU_LOADGAME", "l", "LoadGameMenu"
+    TextItem "$MNU_SAVEGAME", "s", "SaveGameMenu"
+    TextItem "$MNU_INFO", "i", "ReadThisMenu"
+    textItem "$MNU_Credits", "c", "CreditsMenu"
+    TextItem "$sa_Achievements", "a", "AchievementsMenu"
+    TextItem  "$MNU_QUITGAME", "q", "QuitMenu"
 }
 
 //-------------------------------------------------------------------------------------------

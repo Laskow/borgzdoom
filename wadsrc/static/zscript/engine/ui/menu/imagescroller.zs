@@ -149,7 +149,6 @@ class ImageScrollerMenu : Menu
 	int index;
 	ImageScrollerDescriptor mDesc;
 
-
 	private void StartTransition(ImageScrollerPage to, int animtype)
 	{
 		if (AnimatedTransition)
@@ -188,6 +187,7 @@ class ImageScrollerMenu : Menu
 			if (mkey == MKEY_Enter) mkey = MKEY_Back;
 			else if (mkey == MKEY_Right || mkey == MKEY_Left) return true;
 		}
+
 		switch (mkey)
 		{
 		case MKEY_Back:
@@ -208,10 +208,15 @@ class ImageScrollerMenu : Menu
 
 		case MKEY_Right:
 		case MKEY_Enter:
+
 			if (previous == null)
 			{
 				int oldindex = index;
-				if (++index >= mDesc.mItems.Size()) index = 0;
+				if (++index >= mDesc.mItems.Size()) //[las] never loop
+				{
+					index = 0;
+					close();
+				}
 				let next = mDesc.mItems[index];
 				StartTransition(next, 1);
 				MenuSound("menu/choose");
@@ -236,6 +241,7 @@ class ImageScrollerMenu : Menu
 		{
 			return MenuEvent(MKEY_Enter, false);
 		}
+
 		return Super.MouseEvent(type, x, y);
 	}
 
@@ -273,6 +279,8 @@ class ImageScrollerMenu : Menu
 
 	override void Drawer()
 	{
+		screen.Dim(0, 1.0, 0,0, screen.GetWidth(), screen.GetHeight()); // [las] fill the gap
+
 		if (previous != null)
 		{
 			bool wasAnimated = Animated;
