@@ -211,8 +211,7 @@ OptionMenu "OptionsMenu" Protected
 	Submenu "$OPTMNU_SOUND", "BorSoundOptions"
 	Submenu "$OPTMNU_DISPLAY", "BorVideoOptions"
 	Submenu "$OPTMNU_VIDEO", "VideoModeMenu"
-    Submenu "$OPTMNU_NASHGORE", "NashGoreMenu" 
-	Submenu "$TS_OPTIONS_TITLE", "ts_Options"
+	Submenu "$OPTMNU_NASHGORE", "NashGoreMenu" 
 
 	StaticText ""
 	Submenu "$OS_TITLE", "os_Menu"
