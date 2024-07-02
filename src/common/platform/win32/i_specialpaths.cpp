@@ -243,8 +243,8 @@ FString M_GetOldConfigPath(int& type)
 int M_MigrateOldConfig()
 {
 	int selection = IDCANCEL;
-	auto globalstr = L"Share config between " GAMENAME " installations";
-	auto portablestr = L"Create portable config in game folder";
+	auto globalstr = L"Move to Users/ folder";
+	auto portablestr = L"Convert to portable installation";
 	auto cancelstr = L"Cancel";
 	auto titlestr = L"Migrate existing configuration";
 	auto infostr = L"" GAMENAME " found a user specific config in the game folder";
@@ -331,25 +331,14 @@ FString M_GetConfigPath(bool for_reading)
 //
 //===========================================================================
 
+// [las]
+
 FString M_GetScreenshotsPath()
 {
 	FString path;
 
-	if (IsPortable())
-	{
-		path << progdir << "Screenshots/";
-	}
-	else if (IsWindows8OrGreater())
-	{
-		path = GetKnownFolder(-1, FOLDERID_Screenshots, true);
+	path << progdir << "/Screenshots/";
 
-		path << "/" GAMENAME "/";
-	}
-	else 
-	{
-		path = GetKnownFolder(CSIDL_MYPICTURES, FOLDERID_Pictures, true);
-		path << "/Screenshots/" GAMENAME "/";
-	}
 	CreatePath(path);
 	return path;
 }
