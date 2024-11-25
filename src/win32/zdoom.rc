@@ -68,7 +68,7 @@ BEGIN
     "        BLOCK ""040904b0""\r\n"
     "        BEGIN\r\n"
     "            VALUE ""Comments"", ""Thanks to id Software for creating DOOM and then releasing the source code. Thanks also to TeamTNT for creating BOOM, which ZDoom is partially based on. Includes code based on the Cajun Bot 0.97 by Martin Collberg.""\r\n"
-    "            VALUE ""CompanyName"", ""Rectangle Eyes""\r\n"
+    "            VALUE ""CompanyName"", ""4-Cube Games""\r\n"
     "            VALUE ""FileDescription"", ""Borrowhelen""\r\n"
     "            VALUE ""FileVersion"", RC_FILEVERSION2\r\n"
     "            VALUE ""InternalName"", ""Borrowhelen""\r\n"
@@ -76,7 +76,7 @@ BEGIN
     "            VALUE ""LegalTrademarks"", ""DoomR is a Registered Trademark of id Software, Inc.""\r\n"
     "            VALUE ""OriginalFilename"", ""borrowhelen.exe""\r\n"
     "            VALUE ""ProductName"", ""Borrowhelen""\r\n"
-    "            VALUE ""ProductVersion"", "v1.00"\r\n"
+    "            VALUE ""ProductVersion"", "v1.2.0"\r\n"
     "        END\r\n"
     "    END\r\n"
     "    BLOCK ""VarFileInfo""\r\n"
@@ -210,7 +210,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDI_ICON1,IDC_STATIC,7,7,20,20
     LTEXT           "Welcome to Borrowhelen.",IDC_STATIC,43,8,180,8
-    LTEXT           "v1.00",IDC_WELCOME_VERSION,43,18,180,8
+    LTEXT           "v1.2.0",IDC_WELCOME_VERSION,43,18,180,8
     GROUPBOX        "IWAD selection",IDC_STATIC,8,32,208,117
     LTEXT           "Select which game file (IWAD) to run.",IDC_STATIC,12,44,190,8
     LISTBOX         IDC_IWADLIST,12,56,200,87,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
@@ -346,15 +346,15 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "Comments", "Thanks to id Software for creating DOOM and then releasing the source code. Thanks also to TeamTNT for creating BOOM, which ZDoom is partially based on. Includes code based on the Cajun Bot 0.97 by Martin Collberg."
-            VALUE "CompanyName", "Rectangle Eyes"
+            VALUE "CompanyName", "4-Cube Games"
             VALUE "FileDescription", "Borrowhelen "
-            VALUE "FileVersion", "v1.00"
+            VALUE "FileVersion", "v1.2.0"
             VALUE "InternalName", "Borrowhelen"
             VALUE "LegalCopyright", "Copyright © 1993-1996 id Software, 1998-2010 Randy Heit, 2002-2010 Christoph Oelckers, et al."
             VALUE "LegalTrademarks", "Doom® is a Registered Trademark of id Software, Inc."
             VALUE "OriginalFilename", "borrowhelen.exe"
             VALUE "ProductName", "Borrowhelen"
-            VALUE "ProductVersion", "v1.00"
+            VALUE "ProductVersion", "v1.2.0"
         END
     END
     BLOCK "VarFileInfo"

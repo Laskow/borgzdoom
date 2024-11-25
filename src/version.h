@@ -41,11 +41,11 @@ const char *GetVersionString();
 
 /** Lots of different version numbers **/
 
-#define VERSIONSTR "1.0.0" //4.8.2
+#define VERSIONSTR "1.2.0" //4.8.2
 
 // The version as seen in the Windows resource
-#define RC_FILEVERSION 1.0.0,0 //4.8.2.0
-#define RC_PRODUCTVERSION 1.0.0,0 //4.8.2.0
+#define RC_FILEVERSION 1,2,0,0 //4.8.2.0
+#define RC_PRODUCTVERSION 1,2,0,0 //4.8.2.0
 #define RC_PRODUCTVERSION2 VERSIONSTR
 // These are for content versioning.
 #define VER_MAJOR 4
@@ -101,8 +101,8 @@ const char *GetVersionString();
 #define GAMENAME "Borrowhelen"
 #define WGAMENAME L"Borrowhelen"
 #define GAMENAMELOWERCASE "borrowhelen"
-#define FORUM_URL "https://www.artoflaskow.com/contact"
-#define BUGS_FORUM_URL	"https://www.artoflaskow.com/contact"
+#define FORUM_URL "https://steamcommunity.com/app/2116080/discussions/"
+#define BUGS_FORUM_URL	"https://steamcommunity.com/app/2116080/discussions/"
 
 #if defined(__APPLE__) || defined(_WIN32)
 #define GAME_DIR GAMENAME
